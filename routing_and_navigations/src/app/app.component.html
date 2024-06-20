@@ -1,0 +1,13 @@
+<nav>
+  <a routerLink="/">Home</a>
+  <a [routerLink]="['/item/1']" [queryParams]="{ type: 'something special' }"
+    >Item 1</a
+  >
+  <a [routerLink]="['/item/2']" [queryParams]="{ type: 'good going' }"
+    >Item 2</a
+  >
+</nav>
+<router-outlet />
+<button (click)="navigationHandler()">
+  Route parametrs navigation from components project
+</button>
