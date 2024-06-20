@@ -1,0 +1,11 @@
+<!-- app.component.html -->
+<div>
+  <p #paragraph>Original text</p>
+  <button (click)="changeText(paragraph)">Change Text</button>
+</div>
+<!-- app.component.html -->
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" ngModel />
+  <button type="submit">Submit</button>
+</form>

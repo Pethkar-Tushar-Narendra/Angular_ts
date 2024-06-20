@@ -7,6 +7,9 @@ import { PropertyBindingComponent } from './property-binding/property-binding.co
 import { EventBindingComponent } from './event-binding/event-binding.component';
 import { TwoWayBindingComponent } from './two-way-binding/two-way-binding.component';
 import { FormsModule } from '@angular/forms';
+import { TemplateReferenceVariablesComponent } from './template-reference-variables/template-reference-variables.component';
+import { ParentComponentComponent } from './parent-component/parent-component.component';
+import { ChildComponentComponent } from './child-component/child-component.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +17,9 @@ import { FormsModule } from '@angular/forms';
     PropertyBindingComponent,
     EventBindingComponent,
     TwoWayBindingComponent,
+    TemplateReferenceVariablesComponent,
+    ParentComponentComponent,
+    ChildComponentComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
