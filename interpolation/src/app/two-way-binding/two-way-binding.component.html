@@ -1,0 +1,17 @@
+<!-- app.component.html -->
+<div>
+  <!-- Interpolation -->
+  <h1>{{ title }}</h1>
+  <p>Name: {{ user.name }}</p>
+  <p>Age: {{ user.age }}</p>
+
+  <!-- Property Binding -->
+  <img [src]="imageUrl" alt="Angular Logo" />
+
+  <!-- Event Binding -->
+  <button (click)="onClick()">Click Me</button>
+
+  <!-- Two-Way Binding -->
+  <input [(ngModel)]="name" />
+  <p>Your name is: {{ name }}</p>
+</div>
