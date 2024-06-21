@@ -1,2 +1,6 @@
-<app-child (messageEvent)="receiveMessage($event)"></app-child>
-<p>{{ message }}</p>
+<p>Parent to child message</p>
+<p>Message from child: {{ message }}</p>
+<app-child-component
+  [childMessage]="parentMessage"
+  (messageEvent)="receiveMessage($event)"
+></app-child-component>
