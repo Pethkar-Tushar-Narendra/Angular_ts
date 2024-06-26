@@ -1,0 +1,376 @@
+<div class="container">
+  <form #simpleForm="ngForm" (ngSubmit)="onSubmit(simpleForm)">
+    <!-- Single Input Field -->
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        class="form-control"
+        required
+        minlength="3"
+        [(ngModel)]="user.name"
+        #name="ngModel"
+      /><br />
+      {{ name.invalid + "- name.invalid" }}<br />
+      {{ name.touched + " name.touched" }}<br />
+      {{ name.dirty + " name.dirty" }}<br />
+
+      <div
+        *ngIf="name.invalid && (name.dirty || name.touched)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="name.errors?.['required']">Name is required.</div>
+        <div *ngIf="name.errors?.['minlength']">
+          Name must be at least 3 characters long.
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="simpleForm.invalid"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+<div class="container">
+  <form #numberForm="ngForm" (ngSubmit)="onSubmit(numberForm)">
+    <!-- Number Input Field -->
+    <div class="form-group">
+      <label for="quantity">Quantity:</label>
+      <input
+        type="number"
+        id="quantity"
+        name="quantity"
+        class="form-control"
+        required
+        min="1"
+        max="100"
+        step="1"
+        [(ngModel)]="product.quantity"
+        #quantity="ngModel"
+      /><br />
+      {{ quantity.invalid + "- quantity.invalid" }}<br />
+      {{ quantity.touched + "- quantity.touched" }}<br />
+      {{ quantity.dirty + "- quantity.dirty" }}<br />
+
+      <div
+        *ngIf="quantity.invalid && (quantity.dirty || quantity.touched)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="quantity.errors?.['required']">Quantity is required.</div>
+        <div *ngIf="quantity.errors?.['min']">Quantity must be at least 1.</div>
+        <div *ngIf="quantity.errors?.['max']">Quantity cannot exceed 100.</div>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="numberForm.invalid"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+<div class="container">
+  <form #radioForm="ngForm" (ngSubmit)="onSubmit(radioForm)">
+    <!-- Radio Buttons -->
+    <div class="form-group">
+      <label>Gender:</label><br />
+      <label>
+        <input
+          type="radio"
+          name="gender"
+          value="male"
+          [(ngModel)]="user.gender"
+          required
+        />
+        Male
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="gender"
+          value="female"
+          [(ngModel)]="user.gender"
+          required
+        />
+        Female </label
+      ><br />
+      {{ radioForm.invalid + " - radioForm.invalid" }}<br />
+      {{ radioForm.dirty + " - radioForm.dirty" }}<br />
+      {{ radioForm.touched + " - radioForm.touched" }}<br />
+      <div
+        *ngIf="
+          radioForm.controls?.['gender']?.['invalid'] &&
+          (radioForm.controls?.['gender']?.['dirty'] ||
+            radioForm.controls?.['gender']?.['touched'])
+        "
+        class="alert alert-danger"
+      >
+        Gender is required.
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="radioForm.invalid"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+<div class="container">
+  <form #dropdownForm="ngForm" (ngSubmit)="onSubmit(dropdownForm)">
+    <!-- Dropdown (Select) -->
+    <div class="form-group">
+      <label for="country">Select Country:</label>
+      <select
+        id="country"
+        name="country"
+        class="form-control"
+        [(ngModel)]="user.country"
+        required
+      >
+        <option value="">Select a country</option>
+        <option value="usa">United States</option>
+        <option value="canada">Canada</option>
+        <option value="uk">United Kingdom</option>
+        <option value="germany">Germany</option>
+        <option value="france">France</option>
+      </select>
+      <div
+        *ngIf="
+          dropdownForm.controls?.['country']?.['invalid'] &&
+          (dropdownForm.controls?.['country']?.['dirty'] ||
+            dropdownForm.controls?.['country']?.['touched'])
+        "
+        class="alert alert-danger"
+      >
+        Country selection is required.
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="dropdownForm.invalid"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+<div class="container">
+  <form #checkboxForm="ngForm" (ngSubmit)="onSubmit(checkboxForm)">
+    <!-- Checkboxes -->
+    <div class="form-group">
+      <label>Interests:</label><br />
+      <label>
+        <input
+          type="checkbox"
+          name="sports"
+          [(ngModel)]="interests.sports"
+          (change)="updateCheckboxState()"
+        />
+        Sports </label
+      ><br />
+      <label>
+        <input
+          type="checkbox"
+          name="music"
+          [(ngModel)]="interests.music"
+          (change)="updateCheckboxState()"
+        />
+        Music </label
+      ><br />
+      <label>
+        <input
+          type="checkbox"
+          name="movies"
+          [(ngModel)]="interests.movies"
+          (change)="updateCheckboxState()"
+        />
+        Movies
+      </label>
+    </div>
+
+    <!-- Alert Messages -->
+    <div
+      *ngIf="checkboxForm.submitted && !isAnyCheckboxChecked()"
+      class="alert alert-danger"
+    >
+      Please select at least one interest.
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+<div class="container">
+  <form (ngSubmit)="onSubmitMultiSelect()">
+    <label>Select Options:</label><br />
+    <select
+      multiple
+      name="options"
+      [(ngModel)]="selectedOptions"
+      #optionsCtrl="ngModel"
+      required
+    >
+      <option *ngFor="let option of options" [value]="option">
+        {{ option }}
+      </option></select
+    ><br />
+    {{ optionsCtrl.invalid + " - optionsCtrl.invalid" }}<br />
+    {{ optionsCtrl.dirty + " - optionsCtrl.dirty" }}<br />
+    {{ optionsCtrl.touched + " - optionsCtrl.touched" }}<br />
+    <div
+      *ngIf="optionsCtrl.invalid && (optionsCtrl.dirty || optionsCtrl.touched)"
+      class="alert alert-danger"
+    >
+      Please select at least one option.
+    </div>
+
+    <br />
+    <button type="submit" [disabled]="optionsCtrl.invalid">Submit</button>
+  </form>
+</div>
+
+<form #addressForm="ngForm" (ngSubmit)="onSubmit(addressForm)">
+  <div formGroupName="address" class="form-group">
+    <h4>Address</h4>
+    <div>
+      <label for="street">Street:</label>
+      <input
+        type="text"
+        id="street"
+        name="street"
+        class="form-control"
+        [(ngModel)]="user.address.street"
+      />
+    </div>
+    <div>
+      <label for="city">City:</label>
+      <input
+        type="text"
+        id="city"
+        name="city"
+        class="form-control"
+        [(ngModel)]="user.address.city"
+      />
+    </div>
+    <div>
+      <label for="state">State:</label>
+      <input
+        type="text"
+        id="state"
+        name="state"
+        class="form-control"
+        [(ngModel)]="user.address.state"
+      />
+    </div>
+    <div>
+      <label for="zip">Zip:</label>
+      <input
+        type="text"
+        id="zip"
+        name="zip"
+        class="form-control"
+        [(ngModel)]="user.address.zip"
+      />
+    </div>
+  </div>
+  <!-- Submit Button -->
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<div class="container">
+  <form #addressForm="ngForm" (ngSubmit)="onSubmit(addressForm)">
+    <!-- Address Group -->
+    <div class="form-group">
+      <label>Street:</label>
+      <input
+        type="text"
+        name="street"
+        [(ngModel)]="address.street"
+        #street="ngModel"
+        required
+      />
+      <div
+        *ngIf="street.invalid && (street.dirty || street.touched)"
+        class="alert alert-danger"
+      >
+        Street is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>City:</label>
+      <input
+        type="text"
+        name="city"
+        [(ngModel)]="address.city"
+        #city="ngModel"
+        required
+      />
+      <div
+        *ngIf="city.invalid && (city.dirty || city.touched)"
+        class="alert alert-danger"
+      >
+        City is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>State:</label>
+      <input
+        type="text"
+        name="state"
+        [(ngModel)]="address.state"
+        #state="ngModel"
+        required
+      />
+      <div
+        *ngIf="state.invalid && (state.dirty || state.touched)"
+        class="alert alert-danger"
+      >
+        State is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Zip Code:</label>
+      <input
+        type="text"
+        name="zip"
+        [(ngModel)]="address.zip"
+        #zip="ngModel"
+        required
+      />
+      <div
+        *ngIf="zip.invalid && (zip.dirty || zip.touched)"
+        class="alert alert-danger"
+      >
+        Zip Code is required.
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="addressForm.invalid"
+    >
+      Submit
+    </button>
+  </form>
+</div>
