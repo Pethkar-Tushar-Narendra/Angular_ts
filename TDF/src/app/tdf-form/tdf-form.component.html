@@ -1,5 +1,6 @@
 <div class="container">
   <form #simpleForm="ngForm" (ngSubmit)="onSubmit(simpleForm)">
+    {{ "Form data is valid - " + simpleForm.valid }}
     <!-- Single Input Field -->
     <div class="form-group">
       <label for="name">Name:</label>
@@ -12,11 +13,15 @@
         minlength="3"
         [(ngModel)]="user.name"
         #name="ngModel"
+        pattern="^[a-zA-Zà-úÀ-Ú' -]+$"
       /><br />
+      <p *ngIf="name.errors?.['pattern']">enter valid name</p>
+      <p *ngIf="name.dirty&&name.errors?.['required']">
+        enter some string name
+      </p>
       {{ name.invalid + "- name.invalid" }}<br />
       {{ name.touched + " name.touched" }}<br />
       {{ name.dirty + " name.dirty" }}<br />
-
       <div
         *ngIf="name.invalid && (name.dirty || name.touched)"
         class="alert alert-danger"
@@ -42,6 +47,7 @@
   <form #numberForm="ngForm" (ngSubmit)="onSubmit(numberForm)">
     <!-- Number Input Field -->
     <div class="form-group">
+      {{ quantity.errors | json }}
       <label for="quantity">Quantity:</label>
       <input
         type="number"
@@ -83,6 +89,7 @@
   <form #radioForm="ngForm" (ngSubmit)="onSubmit(radioForm)">
     <!-- Radio Buttons -->
     <div class="form-group">
+      {{ radioForm.errors | json }}
       <label>Gender:</label><br />
       <label>
         <input
@@ -133,6 +140,7 @@
   <form #dropdownForm="ngForm" (ngSubmit)="onSubmit(dropdownForm)">
     <!-- Dropdown (Select) -->
     <div class="form-group">
+      {{ dropdownForm.controls?.['country']?.errors | json }}
       <label for="country">Select Country:</label>
       <select
         id="country"
@@ -218,6 +226,7 @@
 </div>
 <div class="container">
   <form (ngSubmit)="onSubmitMultiSelect()">
+    {{ optionsCtrl.errors | json }}
     <label>Select Options:</label><br />
     <select
       multiple
