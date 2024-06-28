@@ -1,0 +1,84 @@
+<h1>{{ title }}</h1>
+{{ form.value | json }}
+<Form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div>
+    <label>UserName : </label>
+    <input type="text" formControlName="username" /><br />
+    {{ username?.invalid + " - invalid" }}<br />
+    {{ username?.dirty + " - dirty" }}<br />
+    {{ username?.touched + " - touched" }}<br />
+    {{ username?.errors?.['required'] + " - required"}}
+  </div>
+  <div>
+    <label>Password : </label>
+    <input type="text" formControlName="password" /><br />
+    {{ password?.invalid + " - invalid" }}<br />
+    {{ password?.dirty + " - dirty" }}<br />
+    {{ password?.touched + " - touched" }}
+  </div>
+  <div>
+    <label>Confirm Password : </label>
+    <input type="text" formControlName="confirmPassword" /><br />
+    {{ confirmPassword?.invalid + " - invalid" }}<br />
+    {{ confirmPassword?.dirty + " - dirty" }}<br />
+    {{ confirmPassword?.touched + " - -touched" }}
+  </div>
+  <div>
+    <label>Select an option:</label>
+    <select id="dropdown" formControlName="dropdown">
+      <option value="" disabled>Select an option</option>
+      <option *ngFor="let option of options" [value]="option">
+        {{ option }}
+      </option></select
+    ><br />
+    {{ dropdown?.invalid + " - invalid" }}<br />
+    {{ dropdown?.dirty + " - dirty" }}<br />
+    {{ dropdown?.touched + " - -touched" }}<br />
+    {{ dropdown?.errors?.['required'] + " - required"}}
+  </div>
+  <div>
+    <label>Confirm Password : </label>
+    <input type="text" formControlName="confirmPassword" /><br />
+    {{ confirmPassword?.invalid + " - invalid" }}<br />
+    {{ confirmPassword?.dirty + " - dirty" }}<br />
+    {{ confirmPassword?.touched + " - -touched" }}
+  </div>
+  <div>
+    <label>Select options:</label>
+    <div *ngFor="let option of options">
+      <input
+        type="checkbox"
+        [value]="option"
+        (change)="onCheckboxChange($event)"
+      />
+      {{ option }}
+    </div>
+    <br />
+    {{ checkboxes?.invalid + " - invalid" }}<br />
+    {{ checkboxes?.dirty + " - dirty" }}<br />
+    {{ checkboxes?.touched + " - -touched" }}
+  </div>
+  <div>
+    <label for="multiselect">Select options:</label>
+    <select
+      id="multiselect"
+      multiple
+      formControlName="multiselect"
+      (change)="onOptionChange($event)"
+    >
+      <option *ngFor="let option of options" [value]="option">
+        {{ option }}
+      </option>
+    </select>
+    <div
+      *ngIf="multiselect.invalid && (multiselect.dirty || multiselect.touched)"
+      class="invalid-feedback"
+    >
+      Please select at least one option.
+    </div>
+    <br />
+    {{ multiselect?.invalid + " - invalid" }}<br />
+    {{ multiselect?.dirty + " - dirty" }}<br />
+    {{ multiselect?.touched + " - -touched" }}
+  </div>
+</Form>

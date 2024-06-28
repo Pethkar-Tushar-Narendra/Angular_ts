@@ -140,7 +140,6 @@
   <form #dropdownForm="ngForm" (ngSubmit)="onSubmit(dropdownForm)">
     <!-- Dropdown (Select) -->
     <div class="form-group">
-      {{ dropdownForm.controls?.['country']?.errors | json }}
       <label for="country">Select Country:</label>
       <select
         id="country"
@@ -156,6 +155,7 @@
         <option value="germany">Germany</option>
         <option value="france">France</option>
       </select>
+      <!-- {{ dropdownForm.controls?.['country']?.errors | json }} -->
       <div
         *ngIf="
           dropdownForm.controls?.['country']?.['invalid'] &&
