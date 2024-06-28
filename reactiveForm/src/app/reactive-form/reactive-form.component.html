@@ -37,13 +37,6 @@
     {{ dropdown?.errors?.['required'] + " - required"}}
   </div>
   <div>
-    <label>Confirm Password : </label>
-    <input type="text" formControlName="confirmPassword" /><br />
-    {{ confirmPassword?.invalid + " - invalid" }}<br />
-    {{ confirmPassword?.dirty + " - dirty" }}<br />
-    {{ confirmPassword?.touched + " - -touched" }}
-  </div>
-  <div>
     <label>Select options:</label>
     <div *ngFor="let option of options">
       <input
