@@ -10,10 +10,13 @@ export class AppComponent implements OnInit {
   public title = 'sevices';
   public data: any;
   public errorMessage: any;
+
   constructor(private jsonPlaceholderService: DataService) {}
+
   ngOnInit() {
     this.getPosts();
   }
+
   // Function to format item
   formatItem(item: any): string {
     return `ID: ${item.userId}, Name: ${item.id}, Description: ${item.title}, Description: ${item.body}`;

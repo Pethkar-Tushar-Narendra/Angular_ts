@@ -1,0 +1,18 @@
+<table>
+  <thead>
+    <tr>
+      <th>Employee Id</th>
+      <th>First Name Last Name</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let employee of employees">
+    <tr>
+      <td>{{ employee.employeeId }}</td>
+      <td>{{ employee.firstName + " " + employee.lastName }}</td>
+      <td>
+        <a [routerLink]="['/users/', employee.employeeId]">Clickhere</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,52 @@
+<h1>Employee Details</h1>
+<form [formGroup]="form">
+  <div style="display: flex">
+    <p>First Name</p>
+    <input name="firstName" type="text" formControlName="firstName" required />
+  </div>
+  <div style="display: flex">
+    <p>Last Name</p>
+    <input name="lastName" type="text" formControlName="lastName" required />
+  </div>
+  <div style="display: flex">
+    <p>Age</p>
+    <input name="age" type="number" formControlName="age" required />
+  </div>
+  <div style="display: flex">
+    <p>Address</p>
+    <input name="address" type="text" formControlName="address" required />
+  </div>
+  <div style="display: flex">
+    <p>Gender</p>
+    <div style="display: flex">
+      <input
+        name="gender"
+        type="radio"
+        formControlName="gender"
+        value="male"
+        required
+      />
+      <p>male</p>
+    </div>
+    <div style="display: flex">
+      <input
+        name="gender"
+        type="radio"
+        formControlName="gender"
+        value="female"
+        required
+      />
+      <p>female</p>
+    </div>
+  </div>
+  <div style="display: flex">
+    <p>Phone</p>
+    <input name="phone" type="text" formControlName="phone" required />
+  </div>
+  <p>{{ errorMessage }}</p>
+  <div style="display: flex">
+    <input type="button" value="Back" (click)="onBack()" />
+    <input type="submit" value="Update" (click)="onSubmit()" />
+    <input type="button" value="Delete" (click)="onDelete()" />
+  </div>
+</form>

@@ -20,6 +20,7 @@ export class ItemDetailComponent {
       this.itemType = params.get('type');
     });
   }
+
   onButtonClick() {
     this.router.navigate(['/item', this.itemId + 1], {
       queryParams: {
@@ -27,4 +28,5 @@ export class ItemDetailComponent {
       },
     });
   }
+  
 }
